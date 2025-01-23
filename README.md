@@ -1,5 +1,5 @@
 # Deep-Learning Digit Classifier
-This is a project that aims to create a model for the classification of numerical digits. From 0 to 9. For this we proposed to create an interactive program that would allow the user to classify the numbers created from an interface.
+This is a project that aims to create a model for the classification of numerical digits. From 0 to 9. For this we proposed to create an interactive program that would allow the user to draw the digits and see the model clasiffication.
 ![alt text](images/demo.gif)
 # Data Collection
 While there is MNIST, which is a consolidated database for the classification of numbers. In this project an interface was developed to allow volunteers from the “Deep Learning (2023-2) UIS” course to create their own digits. The interface called MNIXEL is available [here](https://github.com/Konat23/MNIXEL) for anyone to create their own digiT database.
@@ -30,7 +30,7 @@ Accuracy: 97%
 Confusion Matriz:
 
 ![alt text](images/confusion_matriz.png)
-# Despliegue del modelo
+# Deployment of the model
 Finally we created “02_UI_User_test.py” an interface so that any user can test the model, the program allows to draw the digit and let the model say which digit has been drawn.
 
 ![alt text](images/demo.gif)
