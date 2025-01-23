@@ -43,7 +43,9 @@ class Blackboard:
     def clear(self):
         self.matriz = np.zeros(self.matriz.shape, dtype=np.uint8)
         self.update_surface()
-        
+    def is_mouse_inside(self):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        return self.gray_image.get_rect().collidepoint(mouse_x-self.pos[0], mouse_y-self.pos[1])
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()

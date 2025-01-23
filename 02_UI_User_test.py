@@ -106,6 +106,9 @@ class Grid():
                 if clic_izquierdo:
                     pixel.paint(self.matriz[i,j])
         screen.blit(self.surfaceOne, self.offset)
+    def clear(self):
+        self.matriz = np.zeros((int(size[0]),int(size[1])), dtype=np.uint8)
+        self.draw()
     def set_margin(self,slider):
         self.margin = slider.get_value()*20 # Va de 0 a 20 pixeles
     
@@ -141,7 +144,10 @@ def predict_function(matriz,Text_message):
     Y = np.argmax(Y)
     Text_message.text = f"El numero es: {Y}"
 
-
+def clear_all():
+    board_preview.clear()
+    myboard.clear()
+    text_adivinado.text = f"El numero es:"
 
 def events():
     for event in pygame.event.get():
@@ -153,10 +159,12 @@ def events():
         previewButton.handle_event(event,board_preview,myboard.matriz)
         limpiarButton.handle_event(event)
         myboard.handle_event(event)
-        if event.type == pygame.MOUSEBUTTONUP:
+        # Si solto el mouse y esta algo dibujado
+        if event.type == pygame.MOUSEBUTTONUP and myboard.is_mouse_inside():
             board_preview.matriz = greduce(myboard.matriz,4)
             board_preview.draw()
-        predictButton.handle_event(event,myboard.matriz,text_adivinado)
+            predict_function(myboard.matriz,text_adivinado)
+        #predictButton.handle_event(event,myboard.matriz,text_adivinado)
 
 offset_surface = [10, centersize[1]-centerboard[1]]
 
@@ -166,13 +174,13 @@ board_preview = Grid([board_size[0],board_size[1]],[size[0] - board_size[0], cen
 
 # Crear botones y slider
 slider = Slider(10, 10, 600, 20)
-previewButton = Button(size[0]-200-10, size[1]-40, 100, 40, "Preview", preview_function)
-limpiarButton = Button(0,size[1]-40,100,40,"Limpiar",myboard.clear)
-predictButton = Button(100+10,size[1]-40, 100, 40, "Predict", predict_function)
+previewButton = Button(100+20, 45, 100, 40, "Preview", preview_function)
+limpiarButton = Button(10,45,100,40,"Limpiar",clear_all)
+#predictButton = Button(size[0]-200-10, size[1]-40, 100, 40, "Predict", predict_function) 
 
 # Crear texto
 text = Text(30, f"Dibuja cualquier numero", White, (10, 100))
-text_adivinado = Text(30, f"El numero es", White, (10, 600))
+text_adivinado = Text(90, f"El numero es:", White, (300, 600))
 
 M_test = np.random.randint(0, 256, board_size, dtype=np.uint8)
 while True:
@@ -193,7 +201,7 @@ while True:
     slider.update(screen)
     previewButton.draw(screen)
     limpiarButton.draw(screen)
-    predictButton.draw(screen)
+    #predictButton.draw(screen)
 
     # Texto
     
