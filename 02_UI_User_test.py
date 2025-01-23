@@ -170,7 +170,7 @@ offset_surface = [10, centersize[1]-centerboard[1]]
 
 
 myboard = Blackboard(board_size,offset_surface)
-board_preview = Grid([board_size[0],board_size[1]],[size[0] - board_size[0], centersize[1]-centerboard[1]])
+board_preview = Grid([board_size[0],board_size[1]],[size[0] - board_size[0]-10, centersize[1]-centerboard[1]])
 
 # Crear botones y slider
 slider = Slider(10, 10, 600, 20)
